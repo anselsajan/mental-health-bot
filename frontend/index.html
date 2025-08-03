@@ -8,7 +8,7 @@
   <style>
     body {
       margin: 0;
-      background: #f3f4f6;
+      background: #e8f5e9;
       font-family: 'Segoe UI', sans-serif;
     }
 
@@ -20,7 +20,7 @@
 
     .sidebar {
       width: 25%;
-      background: #1f2937;
+      background: #2e7d32;
       color: white;
       padding: 20px;
       overflow-y: auto;
@@ -28,11 +28,11 @@
     }
 
     .sidebar h5 {
-      color: #f8f9fa;
+      color: #e8f5e9;
     }
 
     .history-item {
-      background: #374151;
+      background: #43a047;
       padding: 10px;
       border-radius: 8px;
       margin-bottom: 10px;
@@ -44,12 +44,12 @@
       width: 75%;
       display: flex;
       flex-direction: column;
-      background: white;
-      border-left: 1px solid #dee2e6;
+      background: #f1f8e9;
+      border-left: 1px solid #c8e6c9;
     }
 
     .chat-header {
-      background: #6c63ff;
+      background: #66bb6a;
       color: white;
       padding: 20px;
       text-align: center;
@@ -64,7 +64,7 @@
       display: flex;
       flex-direction: column;
       gap: 15px;
-      background-color: #f9fafb;
+      background-color: #f9fbe7;
     }
 
     .chat-bubble {
@@ -78,12 +78,12 @@
 
     .user {
       align-self: flex-end;
-      background-color: #c7f2ff;
+      background-color: #dcedc8;
     }
 
     .bot {
       align-self: flex-start;
-      background-color: #e0e7ff;
+      background-color: #c8e6c9;
     }
 
     .chat-input {
@@ -95,7 +95,7 @@
 
     .chat-input input {
       flex-grow: 1;
-      border: 1px solid #ced4da;
+      border: 1px solid #aed581;
       outline: none;
       padding: 10px;
       border-radius: 10px;
@@ -103,20 +103,19 @@
     }
 
     .chat-input button {
-      background-color: #6c63ff;
+      background-color: #66bb6a;
       color: white;
       border: none;
       border-radius: 10px;
       padding: 10px 20px;
     }
 
-    /* History Toggle Button (Mobile only) */
     .toggle-history {
       display: none;
       position: absolute;
       top: 15px;
       left: 15px;
-      background: #6c63ff;
+      background: #66bb6a;
       color: white;
       padding: 10px 15px;
       border-radius: 8px;
@@ -152,17 +151,17 @@
 </head>
 <body>
 
-<!-- Toggle Button for History (Mobile Only) -->
+
 <button class="toggle-history" onclick="toggleSidebar()">History</button>
 
 <div class="main-container">
-  <!-- Sidebar -->
+  
   <div class="sidebar" id="sidebar">
     <h5>Chat History</h5>
     <div id="history"></div>
   </div>
 
-  <!-- Chat Area -->
+
   <div class="chat-area">
     <div class="chat-header">Mental Health Bot</div>
     <div id="chat-box" class="chat-box"></div>
@@ -174,17 +173,15 @@
 </div>
 
 <script>
+  const BACKEND_URL = "https://mental-health-bot-backend.onrender.com";
+
   const chatBox = document.getElementById("chat-box");
   const historyContainer = document.getElementById("history");
   const sidebar = document.getElementById("sidebar");
   let currentHistory = [];
 
   function toggleSidebar() {
-    if (sidebar.style.display === "block") {
-      sidebar.style.display = "none";
-    } else {
-      sidebar.style.display = "block";
-    }
+    sidebar.style.display = sidebar.style.display === "block" ? "none" : "block";
   }
 
   function appendMessage(text, sender) {
@@ -212,7 +209,7 @@
     input.value = "";
 
     try {
-      const res = await fetch("http://localhost:5000/chat", {
+      const res = await fetch(`${BACKEND_URL}/chat`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
